@@ -1,0 +1,14 @@
+{
+    "name": "doctor-appointments-app",
+    "version": "1.0.0",
+    "author": "Ali Kahoot <kahoot.ali@outlook.com>",
+    "description": "A web app for displaying doctor appointments",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "axios": "^1.5.1"
+    }
+  }

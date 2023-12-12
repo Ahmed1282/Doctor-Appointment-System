@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Appointments</title>
+  <link rel="stylesheet" href="styles.css"> 
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Doctor Appointments</h1>
+  </header>
+  <nav>
+    <ul class="tabs">
+      <li id="doctors-tab" class="active">Doctors</li>
+      <li id="appointments-tab">Appointments</li>
+    </ul>
+  </nav>
+  <main>
+    <div id="doctors-content" class="tab-content">
+      <h2>Doctors List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Speciality</th>
+          </tr>
+        </thead>
+        <tbody id="doctors-list"></tbody>
+      </table>
+    </div>
+    <div id="appointments-content" class="tab-content">
+      <h2>Appointments List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody id="appointments-list"></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
