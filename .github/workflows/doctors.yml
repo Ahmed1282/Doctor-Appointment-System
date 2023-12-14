@@ -1,0 +1,33 @@
+name: CI/CD Pipeline for Doctors
+
+on:
+  pull_request:
+    branches:
+      - '*'
+    paths:
+      - 'doctors/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'doctors/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      run: |
+        DOCKER_VERSION=$(git rev-parse --short HEAD)
+        DOCTORS_VERSION=${DOCKER_VERSION}
+        echo "DOCTORS_VERSION=${DOCTORS_VERSION}" >> $GITHUB_ENV        
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/doctors:${DOCKER_VERSION} ./doctors
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/doctors:${DOCKER_VERSION}
+    
+    - name: Update .env file with DOCTORS_VERSION
+      run: echo "DOCTORS_VERSION=${DOCTORS_VERSION}" >> .env
