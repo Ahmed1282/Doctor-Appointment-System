@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointments-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appointments
+  template:
+    metadata:
+      labels:
+        app: appointments
+    spec:
+      containers:
+        - name: appointments
+          image: ahmedbaig137/appointments
+          ports:
+            - containerPort: 7071
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 7071
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 7071
+            initialDelaySeconds: 5
+            periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appointments-service
+spec:
+  selector:
+    app: appointments
+  ports:
+    - protocol: TCP
+      port: 7071
+      targetPort: 7071
